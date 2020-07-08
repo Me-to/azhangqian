@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+register
+
+<form action="http://localhost:8080/user/register" method="post">
+    用户名:<input type="text" name="username" > <br/>
+    密码  : <input type="text" name="password"> <br>
+    邮箱<input id="em" type="text" name="email"><input type="button" value="发送" id="fasong"></input><br>
+    验证码 <input type="text" name="yan"> <br>
+    <input type="submit" value="注册">
+</form>
+
+
+<script>
+    $(document).ready(function() {
+        $("#fasong").click(function () {
+            $.ajax({
+                url: "http://localhost:8080/user/yan",
+                type: "GET",
+                params: {},
+                data: {email:$("input[name='email']").val()},
+                success: function (data) {
+                 window.alert("发送成功")
+
+                },
+                error: function (xhr, stat, exmsg) {
+                    window.alert("发送失败")
+                }
+            });
+        })
+    })
+</script>
+</body>
+</html>

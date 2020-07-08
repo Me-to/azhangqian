@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<div class="container"  id="app">
+    <div class="c1">
+
+        <div class="c11">
+            <h1 class="mainhead">PICK YOUR SPOT</h1>
+            <p class="mainp">只需单击下面的按钮，即可在登录和注册之间切换</p>
+        </div>
+        <div id="left">
+            <h1 class="s1class"><span>登录</span><span class="su">IN</span>
+            </h1>
+        </div>
+        <div id="right">
+            <h1 class="s2class"><span>注册</span><span class="su">UP</span></h1>
+        </div>
+    </div>
+    <div class="c2">
+        <form class="signup" action="/user/register">
+            <h1 class="signup1">注册</h1>
+            <br>
+            <input name="username" type="text" placeholder="用户名" class="username" />
+            <input name="password" type="password" placeholder="密码" class="username" />
+            <input name="email" type="text" placeholder="邮箱" class="username" />
+            <input name="yan" type="text" placeholder="验证码" class="username" style="size: 10px" /><button class="btn" id="fasong">验证码发送</button>
+            <button class="btn" id="zhuce">注册</button>
+        </form>
+        <form class="signin" action="/user/login">
+
+            <h1 class="signup1">登录</h1>
+            <br><br><br><br>
+            <input name="username" type="text" placeholder="用户名" class="username" />
+
+            <input name="password" type="password" placeholder="密码" class="username" />
+
+            <button class="btn">登录</button>
+
+            <br><br><br><br>
+            <a href="">
+                <p class="signup2" id="wangji">忘记密码</p>
+            </a>
+        </form>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $(".container").fadeIn(1000);
+        $(".s2class").css({"color":"#EE9BA3"});
+        $(".s1class").css({"color":"#748194"});
+        $("#left").removeClass("left_hover");
+        $("#right").addClass("right_hover");
+        $(".signin").css({"display":"none"});
+        $(".signup").css({"display":""});
+    });
+    $("#right").click(function(){
+        $("#left").removeClass("left_hover");
+        $(".s2class").css({"color":"#EE9BA3"});
+        $(".s1class").css({"color":"#748194"});
+        $("#right").addClass("right_hover");
+        $(".signin").css({"display":"none"});
+        $(".signup").css({"display":""});
+    });
+    $("#left").click(function(){
+        $(".s1class").css({"color":"#EE9BA3"});
+        $(".s2class").css({"color":"#748194"});
+        $("#right").removeClass("right_hover");
+        $("#left").addClass("left_hover");
+        $(".signup").css({"display":"none"});
+        $(".signin").css({"display":""});
+    });
+</script>
+
+<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    // $("zhuce").click(function (data) {
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: "www.localhost:31001/get/a",
+    //         data: data,
+    //         dataType: dataType,
+    //         success: function () {},
+    //         error: function () {}
+    //     });
+    // })
+    $(document).ready(function() {
+        $("#fasong").click(function () {
+            $.ajax({
+                url: "http://localhost:8080/user/yan",
+                type: "GET",
+                params: {},
+                data: {email:$("input[name='email']").val()},
+                success: function () {
+                    window.alert("发送成功")
+
+                },
+                error: function () {
+                    window.alert("发送失败")
+                }
+            });
+        })
+    })
+</script>
+
+</body>
+</html>

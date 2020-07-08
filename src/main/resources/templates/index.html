@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+<!--页面导航-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">信息管理</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://localhost:8080/game.html">游戏</a></li>
+                <li><a href="http://localhost:8080/add.html">添加用户</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!--页面中心-->
+<div class="container" id="app">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">人员信息</div>
+
+        <!-- Table -->
+        <table class="table">
+            <tr>
+                <th>id</th>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="(user,index) in users" :key="user.id">
+                <td v-text="user.id"></td>
+                <td v-text="user.number"></td>
+                <td v-text="user.name"></td>
+                <td v-text="user.sex"></td>
+                <td v-text="user.age"></td>
+                <td>
+                    <button type="button" class="btn btn-primary">详情</button>
+                    <button type="button" class="btn btn-warning">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            </tr>
+        </table>
+    </div>
+    <div style="margin: 0px auto;display: table;">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#" v-for="">1</a></li>
+                <li><a href="#" v-for="">2</a></li>
+                <li><a href="#" v-for="">3</a></li>
+                <li><a href="#" v-for="">4</a></li>
+
+
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+        >
+
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            users: [],
+            return: {
+                index: 1,
+                total: 10, //总的页数
+                cur: 1,//当前页码
+                totalPage: 0 //当前条数
+
+            }
+
+        },
+        methods: {},
+        created() {
+            let _this = this;
+            axios.get("http://localhost:8080/student/students").then(function (response) {
+                _this.users = response.data.data;
+                console.log(_this.users)
+
+            }).catch(function (err) {
+                console.log(err)
+            })
+        }
+    });
+
+</script>
+</body>
+</html>
